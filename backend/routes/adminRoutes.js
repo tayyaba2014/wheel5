@@ -87,6 +87,7 @@ import {
   updateCity,
   updateModel,
   updateSeries,
+  fetchVehicleYears,
 } from "../controllers/brandController.js";
 import { uploadVehicleImages } from "../middlewares/uploadMiddleware2.js";
 import {
@@ -154,6 +155,7 @@ export default (app) => {
   );
 
   //Home
+  app.get("/admin/fetchVehicleYears", fetchVehicleYears);
   app.post("/addHomePage", addHomePageData);
 
   app.get("/home", getHomePageData);

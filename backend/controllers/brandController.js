@@ -87,6 +87,28 @@ import {
   }
 }; */
 
+export const fetchVehicleYears = async (req, res) => {
+  try {
+    const query = `
+      SELECT DISTINCT year
+      FROM tbl_vehicles
+      WHERE vehicleStatus = 'Y'
+        AND approval = 'Y'
+      ORDER BY year DESC
+    `;
+ 
+    const [rows] = await pool.query(query);
+ 
+    // Return just an array of years
+    const years = rows.map((row) => row.year);
+ 
+    return res.status(200).json(years); // <-- plain array
+  } catch (error) {
+    console.error("Error fetching vehicle years:", error);
+    return res.status(500).json({ error: "Internal server error" });
+  }
+};
+
 export const getBrands = async (req, res) => {
   try {
     const {
